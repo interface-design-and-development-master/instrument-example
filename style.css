@@ -1,0 +1,47 @@
+/*import font*/
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+/*define custom variables*/
+:root{
+    /* Late Night Bath Palette by sukinapan https://lospec.com/palette-list/late-night-bath */
+    --col01: #282d3c;
+    --col02: #f0f6f0;
+    --col03: #ffc4b8;
+    --col04: #5b5d70;
+    --col05: #74838c;
+    --col06: #f69197;
+    --border: solid 2px var(--col04);
+}
+
+body {
+    font-family: "Work Sans", serif;
+    background-color: var(--col01);
+    color: var(--col02);
+    display: flex;
+    flex-direction: column;
+    /*align-items: center;*/
+    gap: 2rem;
+    max-width: 1280px;
+    padding: 0 3rem;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding-top: 1rem;
+}
+
+/*intro modal dialog*/
+dialog[open] {
+    margin: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
