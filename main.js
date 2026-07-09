@@ -1,0 +1,1 @@
+const synth = new Tone.PolySynth(Tone.Synth).toDestination();

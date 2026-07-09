@@ -3,20 +3,36 @@
 
 /*define custom variables*/
 :root{
-    /* Late Night Bath Palette by sukinapan https://lospec.com/palette-list/late-night-bath */
-    --col01: #282d3c;
+    /* 1 Bit Monitor Glow Palette by Polyducks https://lospec.com/palette-list/1bit-monitor-glow */
+    --col01: #222323;
     --col02: #f0f6f0;
+    /* Late Night Bath Palette by sukinapan https://lospec.com/palette-list/late-night-bath */
     --col03: #ffc4b8;
     --col04: #5b5d70;
     --col05: #74838c;
     --col06: #f69197;
-    --border: solid 2px var(--col04);
+    --border: solid 2px var(--col01);
+}
+
+/*reorder colours for dark mode*/
+@media (prefers-color-scheme: dark) {
+    :root{
+        /* 1 Bit Monitor Glow Palette by Polyducks https://lospec.com/palette-list/1bit-monitor-glow */
+        --col01: #f0f6f0;
+        --col02: #222323;
+        /* Late Night Bath Palette by sukinapan https://lospec.com/palette-list/late-night-bath */
+        --col03: #f69197;
+        --col04: #74838c;
+        --col05: #5b5d70;
+        --col06: #ffc4b8;
+        --border: solid 2px var(--col01);
+    }
 }
 
 body {
     font-family: "Work Sans", serif;
-    background-color: var(--col01);
-    color: var(--col02);
+    background-color: var(--col02);
+    color: var(--col01);
     display: flex;
     flex-direction: column;
     /*align-items: center;*/
