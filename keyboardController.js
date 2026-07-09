@@ -28,7 +28,9 @@ allKeys.forEach(key => {
    key.addEventListener("mouseup", (e) => {
        // runs much the same as above, but in reverse : it uses triggerRelease() and
        // .classList.remove() instead
-       synth.triggerRelease();
+       let note = e.target.dataset.note;
+       let octave = e.target.parentElement.parentElement.dataset.octave;
+       synth.triggerRelease(note+octave);
        e.target.classList.remove("activeKey");
    });
    // runs once when cursor enters hovers over key
@@ -47,7 +49,9 @@ allKeys.forEach(key => {
    // we don't need to worry about held buttons here, it's pretty much the same as the
    // mouseup function
    key.addEventListener("mouseleave", (e) => {
-       synth.triggerRelease();
+       let note = e.target.dataset.note;
+       let octave = e.target.parentElement.parentElement.dataset.octave;
+       synth.triggerRelease(note+octave);
        e.target.classList.remove("activeKey");
    });
 });
