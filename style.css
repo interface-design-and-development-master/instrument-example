@@ -31,7 +31,7 @@
 
 body {
     font-family: "Work Sans", serif;
-    background-color: var(--col02);
+    background-color: var(--col05);
     color: var(--col01);
     display: flex;
     flex-direction: column;
@@ -45,11 +45,20 @@ body {
 
 main {
     max-width: 1280px;
+    background-color: var(--col02);
+    padding: 1rem;
     flex: 1;
     display: grid;
-    padding-top: 1rem;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto auto auto;
 }
 
+section{
+    padding: 1rem;
+}
+.keyboardSection {
+    grid-column: 1/3;
+}
 /*intro modal dialog*/
 dialog[open] {
     margin: auto;
@@ -68,7 +77,23 @@ h1 {
     Retrieved 2026-07-10, License - CC BY-SA 3.0
     */
     -webkit-text-stroke: 0.0625rem var(--col01);
+}
 
+label{
+    display: flex;
+    gap: 1rem;
+}
+
+/*this holds the slider and the label*/
+.rangeInputBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/*this holds slider and the values*/
+.rangeSliderBox {
+    display: flex;
+    gap: 1rem;
 }
 
 /*range css from: https://range-input-css.netlify.app/*/
@@ -79,7 +104,7 @@ input[type="range"] {
     appearance: none;
     background: transparent;
     cursor: pointer;
-    width: 25rem;
+    width: 20rem;
 }
 
 /* Removes default focus */
@@ -99,7 +124,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
     appearance: none;
-    margin-top: -4px; /* Centers thumb on the track */
+    margin-top: -0.375rem; /* Centers thumb on the track */
     /*background-color: #808080;*/
     background: linear-gradient(to left, var(--col01) -50%, var(--col02) 30% 70%, var(--col01) 150%);
     border: var(--col01) solid 0.0625rem;

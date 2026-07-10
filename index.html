@@ -26,147 +26,158 @@
 </dialog>
 
 <main>
+    <section class="infoSection">
+        <h1>Specialisation Synth 01</h1>
+    </section>
 
-    <h1>Specialisation Synth 01</h1>
-
-    <label>
-        <input type="range" name="volume" id="volume-slider" min="-32" max="0">
-        Volume
-    </label>
-
-
-    <fieldset>
-        <legend>Select a wave form:</legend>
-
-        <label>
-            <input type="radio" id="sine-select" class="waveformSelect" name="waveform" value="sine" />
-            Sine
-        </label>
-
-        <label>
-            <input type="radio" id="square-select" class="waveformSelect" name="waveform" value="square" />
-            Square
-        </label>
-
-        <label>
-            <input type="radio" id="triangle-select" class="waveformSelect" name="waveform" value="triangle" />
-            Triangle
-        </label>
-
-        <label>
-            <input type="radio" id="sawtooth-select" class="waveformSelect" name="waveform" value="sawtooth" />
-            Sawtooth
-        </label>
-
-    </fieldset>
-
-    <fieldset>
-        <legend>Envelope:</legend>
-
-        <label>
-            <input type="range" name="attack" id="attack-slider" class="envelopeSlider" data-env="attack"
-                   min="0" max="10" step="0.001">
-            Attack
-        </label>
-
-        <label>
-            <input type="range" name="attack" id="decay-slider" class="envelopeSlider" data-env="decay"
-                   min="0" max="10" step="0.001">
-            Decay
-        </label>
-
-        <label>
-            <input type="range" name="attack" id="sustain-slider" class="envelopeSlider" data-env="sustain"
-                   min="0" max="1" step="0.01">
-            Sustain
-        </label>
-
-        <label>
-            <input type="range" name="attack" id="release-slider" class="envelopeSlider" data-env="release"
-                   min="0" max="10" step="0.001">
-            Release
-        </label>
-    </fieldset>
-
-    <fieldset>
-        <legend>Filter:</legend>
-
-        <label>
-            Filter Type
-            <select name="filter-types" id="filter-types-select">
-                <option value="lowpass">Lowpass</option>
-                <option value="highpass">Highpass</option>
-                <option value="bandpass">Bandpass</option>
-                <option value="notch">Notch</option>
-            </select>
-        </label>
-
-        <label>
-            <input type="range" name="attack" id="filter-freq-slider" min="0" max="20000">
-            Frequency
-        </label>
-
-        <label>
-            <input type="range" name="attack" id="filter-q-slider" min="0" max="20" step="0.01">
-            Q
-        </label>
-
-    </fieldset>
-
-    <!--
-    This is a template for a keyboard controller : we will look at building this style of
-    input in class, but feel free to reference my code pattern. I've modularised the CSS &
-    JS portions into their own file, but they rely on an HTML structure like that below.
-    -->
-    <div class="keyboardContainer">
-        <div class="octaveContainer" data-octave="3">
-            <div class="whiteKeyContainer">
-                <button class="whiteKey" data-note="c"></button>
-                <button class="whiteKey" data-note="d"></button>
-                <button class="whiteKey" data-note="e"></button>
-                <button class="whiteKey" data-note="f"></button>
-                <button class="whiteKey" data-note="g"></button>
-                <button class="whiteKey" data-note="a"></button>
-                <button class="whiteKey" data-note="b"></button>
+    <section class="outputSection">
+        <h2>Output</h2>
+        <div class="rangeInputBox">
+            <div class="rangeSliderBox">
+                <span>Min</span>
+                <input type="range" name="volume" id="volume-slider"
+                       min="-32" max="0">
+                <span>Max</span>
             </div>
-            <div class="blackKeyContainer">
-                <div class="blackKeySpacer"></div>
-                <button class="blackKey" data-note="c#"></button>
-                <button class="blackKey" data-note="d#"></button>
-                <div class="blackKeySpacer"></div>
-                <div class="blackKeySpacer"></div>
-                <button class="blackKey" data-note="f#"></button>
-                <button class="blackKey" data-note="g#"></button>
-                <button class="blackKey" data-note="a#"></button>
-                <div class="blackKeySpacer"></div>
-            </div>
+            <label for="volume-slider">Volume</label>
         </div>
+        
+    </section>
 
-        <div class="octaveContainer" data-octave="4">
-            <div class="whiteKeyContainer">
-                <button class="whiteKey" data-note="c"></button>
-                <button class="whiteKey" data-note="d"></button>
-                <button class="whiteKey" data-note="e"></button>
-                <button class="whiteKey" data-note="f"></button>
-                <button class="whiteKey" data-note="g"></button>
-                <button class="whiteKey" data-note="a"></button>
-                <button class="whiteKey" data-note="b"></button>
+    <section class="timbreSection">
+        <fieldset>
+            <legend>Select a wave form:</legend>
+
+            <label>
+                <input type="radio" id="sine-select" class="waveformSelect" name="waveform" value="sine" />
+                Sine
+            </label>
+
+            <label>
+                <input type="radio" id="square-select" class="waveformSelect" name="waveform" value="square" />
+                Square
+            </label>
+
+            <label>
+                <input type="radio" id="triangle-select" class="waveformSelect" name="waveform" value="triangle" />
+                Triangle
+            </label>
+
+            <label>
+                <input type="radio" id="sawtooth-select" class="waveformSelect" name="waveform" value="sawtooth" />
+                Sawtooth
+            </label>
+
+        </fieldset>
+        <fieldset>
+            <legend>Filter:</legend>
+
+            <label>
+                Filter Type
+                <select name="filter-types" id="filter-types-select">
+                    <option value="lowpass">Lowpass</option>
+                    <option value="highpass">Highpass</option>
+                    <option value="bandpass">Bandpass</option>
+                    <option value="notch">Notch</option>
+                </select>
+            </label>
+
+            <label>
+                <input type="range" name="attack" id="filter-freq-slider" min="0" max="20000">
+                Frequency
+            </label>
+
+            <label>
+                <input type="range" name="attack" id="filter-q-slider" min="0" max="20" step="0.01">
+                Q
+            </label>
+
+        </fieldset>
+    </section>
+    <section class="envelopeSection">
+        <fieldset>
+            <legend>Envelope:</legend>
+
+            <label>
+                <input type="range" name="attack" id="attack-slider" class="envelopeSlider" data-env="attack"
+                       min="0" max="10" step="0.001">
+                Attack
+            </label>
+
+            <label>
+                <input type="range" name="attack" id="decay-slider" class="envelopeSlider" data-env="decay"
+                       min="0" max="10" step="0.001">
+                Decay
+            </label>
+
+            <label>
+                <input type="range" name="attack" id="sustain-slider" class="envelopeSlider" data-env="sustain"
+                       min="0" max="1" step="0.01">
+                Sustain
+            </label>
+
+            <label>
+                <input type="range" name="attack" id="release-slider" class="envelopeSlider" data-env="release"
+                       min="0" max="10" step="0.001">
+                Release
+            </label>
+        </fieldset>
+    </section>
+    <section class="keyboardSection">
+        <!--
+        This is a template for a keyboard controller : we will look at building this style of
+        input in class, but feel free to reference my code pattern. I've modularised the CSS &
+        JS portions into their own file, but they rely on an HTML structure like that below.
+        -->
+        <div class="keyboardContainer">
+            <div class="octaveContainer" data-octave="3">
+                <div class="whiteKeyContainer">
+                    <button class="whiteKey" data-note="c"></button>
+                    <button class="whiteKey" data-note="d"></button>
+                    <button class="whiteKey" data-note="e"></button>
+                    <button class="whiteKey" data-note="f"></button>
+                    <button class="whiteKey" data-note="g"></button>
+                    <button class="whiteKey" data-note="a"></button>
+                    <button class="whiteKey" data-note="b"></button>
+                </div>
+                <div class="blackKeyContainer">
+                    <div class="blackKeySpacer"></div>
+                    <button class="blackKey" data-note="c#"></button>
+                    <button class="blackKey" data-note="d#"></button>
+                    <div class="blackKeySpacer"></div>
+                    <div class="blackKeySpacer"></div>
+                    <button class="blackKey" data-note="f#"></button>
+                    <button class="blackKey" data-note="g#"></button>
+                    <button class="blackKey" data-note="a#"></button>
+                    <div class="blackKeySpacer"></div>
+                </div>
             </div>
-            <div class="blackKeyContainer">
-                <div class="blackKeySpacer"></div>
-                <button class="blackKey" data-note="c#"></button>
-                <button class="blackKey" data-note="d#"></button>
-                <div class="blackKeySpacer"></div>
-                <div class="blackKeySpacer"></div>
-                <button class="blackKey" data-note="f#"></button>
-                <button class="blackKey" data-note="g#"></button>
-                <button class="blackKey" data-note="a#"></button>
-                <div class="blackKeySpacer"></div>
+
+            <div class="octaveContainer" data-octave="4">
+                <div class="whiteKeyContainer">
+                    <button class="whiteKey" data-note="c"></button>
+                    <button class="whiteKey" data-note="d"></button>
+                    <button class="whiteKey" data-note="e"></button>
+                    <button class="whiteKey" data-note="f"></button>
+                    <button class="whiteKey" data-note="g"></button>
+                    <button class="whiteKey" data-note="a"></button>
+                    <button class="whiteKey" data-note="b"></button>
+                </div>
+                <div class="blackKeyContainer">
+                    <div class="blackKeySpacer"></div>
+                    <button class="blackKey" data-note="c#"></button>
+                    <button class="blackKey" data-note="d#"></button>
+                    <div class="blackKeySpacer"></div>
+                    <div class="blackKeySpacer"></div>
+                    <button class="blackKey" data-note="f#"></button>
+                    <button class="blackKey" data-note="g#"></button>
+                    <button class="blackKey" data-note="a#"></button>
+                    <div class="blackKeySpacer"></div>
+                </div>
             </div>
+
         </div>
-
-    </div>
-
+    </section>
 </main>
 
 </body>
