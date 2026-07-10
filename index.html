@@ -27,23 +27,69 @@
 
 <main>
 
-    <h1>Information Design Exercise</h1>
+    <h1>Specialisation Synth 01</h1>
 
-    <!-- !!!! -->
-    <!-- These are the three range elements we will be working on for this exercise -->
-    <input type="range" id="var1Range" min="-48" max="0" step="1" value="1">
-    <label for="var1Range"></label>
+    <label>
+        <input type="range" name="volume" id="volume-slider" min="-32" max="0">
+        Volume
+    </label>
 
-    <input type="range" id="var2Range" min="1" max="25" step="1" value="5">
-    <label for="var2Range"></label>
 
-    <input type="range" id="var3Range" min="1" max="100" step="1" value="1">
-    <label for="var3Range"></label>
-    <!-- !!!! -->
+    <fieldset>
+        <legend>Select a wave form:</legend>
+
+        <label>
+            <input type="radio" id="sine-select" class="waveformSelect" name="waveform" value="sine" />
+            Sine
+        </label>
+
+        <label>
+            <input type="radio" id="square-select" class="waveformSelect" name="waveform" value="square" />
+            Square
+        </label>
+
+        <label>
+            <input type="radio" id="triangle-select" class="waveformSelect" name="waveform" value="triangle" />
+            Triangle
+        </label>
+
+        <label>
+            <input type="radio" id="sawtooth-select" class="waveformSelect" name="waveform" value="sawtooth" />
+            Sawtooth
+        </label>
+
+    </fieldset>
+
+    <fieldset>
+        <legend>Envelope:</legend>
+
+        <label>
+            <input type="range" name="attack" id="attack-slider" class="envelopeSlider" min="-32" max="0">
+            Attack
+        </label>
+
+        <label>
+            <input type="range" name="attack" id="attack-slider" class="envelopeSlider" min="-32" max="0">
+            Attack
+        </label>
+
+        <label>
+            <input type="range" name="attack" id="attack-slider" class="envelopeSlider" min="-32" max="0">
+            Attack
+        </label>
+
+        <label>
+            <input type="range" name="attack" id="attack-slider" class="envelopeSlider" min="-32" max="0">
+            Attack
+        </label>
+    </fieldset>
+
+
+
 
     <!--
     This is a template for a keyboard controller : we will look at building this style of
-    input in class, but feel free to reference my code patter. I've modularised the CSS &
+    input in class, but feel free to reference my code pattern. I've modularised the CSS &
     JS portions into their own file, but they rely on an HTML structure like that below.
     -->
     <div class="keyboardContainer">
