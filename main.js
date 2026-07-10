@@ -1,12 +1,34 @@
+
+const introDialog = document.getElementById("intro-dialog");
+const dialogCloseButton = document.getElementById("dialog-close-button");
 const volumeSlider = document.getElementById("volume-slider");
 // find all the waveform select radio inputs and make them into an array
 const waveformInputs = Array.from(document.getElementsByClassName("waveformSelect"));
+const envelopeInputs = Array.from(document.getElementsByClassName("envelopeSlider"));
 
-const synth = new Tone.PolySynth(Tone.Synth).toDestination();
+const synth = new Tone.PolySynth(Tone.Synth);
+
+//// DIALOG INIT
+// show modal on page load
+introDialog.showModal();
+
+dialogCloseButton.addEventListener("click", () => {
+    introDialog.close();
+});
+
+introDialog.addEventListener("close", toneInit);
+
+function toneInit(){
+    synth.toDestination();
+}
 
 const defaultPreset = {
     volume: 0,
-    oscType: "square"
+    oscType: "square",
+    attack: 0.005,
+    decay: 0.1,
+    sustain: 0.3,
+    release: 1
 }
 
 // update synth values and UI to reflect default presets
@@ -21,7 +43,7 @@ function changeVolume(newVolume){
     synth.set({volume: newVolume});
 }
 
-/* then we add an eventlister that triggers our function to the appropriate input */
+/* then we add an eventlistener that triggers our function to the appropriate input */
 volumeSlider.addEventListener("input", (e) => {
     // volume decibels are a bit tricky because they have a logarithmic relationship to loudness
     // see here for a breakdown: https://www.outeraudio.com/understanding-loudness/
@@ -49,3 +71,17 @@ function changeOscillatorType(newOscType){
         oscillator : { type: newOscType }
     });
 }
+
+// loop through each input and add eventlistener
+envelopeInputs.forEach((input) => {
+    // we're looping anyway so get the default value in there
+    input.value = defaultPreset[input.dataset.env];
+    input.addEventListener("input", (e) => {
+        // here we're using the stored data attribute to set the appropriate value
+        synth.set({
+            envelope: {
+                [input.dataset.env]: e.target.value
+            }
+        })
+    });
+});

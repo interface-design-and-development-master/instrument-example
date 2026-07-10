@@ -64,23 +64,27 @@
         <legend>Envelope:</legend>
 
         <label>
-            <input type="range" name="attack" id="attack-slider" class="envelopeSlider" min="-32" max="0">
+            <input type="range" name="attack" id="attack-slider" class="envelopeSlider" data-env="attack"
+                   min="0" max="10" step="0.001">
             Attack
         </label>
 
         <label>
-            <input type="range" name="attack" id="attack-slider" class="envelopeSlider" min="-32" max="0">
-            Attack
+            <input type="range" name="attack" id="decay-slider" class="envelopeSlider" data-env="decay"
+                   min="0" max="10" step="0.001">
+            Decay
         </label>
 
         <label>
-            <input type="range" name="attack" id="attack-slider" class="envelopeSlider" min="-32" max="0">
-            Attack
+            <input type="range" name="attack" id="sustain-slider" class="envelopeSlider" data-env="sustain"
+                   min="0" max="1" step="0.01">
+            Sustain
         </label>
 
         <label>
-            <input type="range" name="attack" id="attack-slider" class="envelopeSlider" min="-32" max="0">
-            Attack
+            <input type="range" name="attack" id="release-slider" class="envelopeSlider" data-env="release"
+                   min="0" max="10" step="0.001">
+            Release
         </label>
     </fieldset>
 
