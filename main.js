@@ -5,8 +5,12 @@ const volumeSlider = document.getElementById("volume-slider");
 // find all the waveform select radio inputs and make them into an array
 const waveformInputs = Array.from(document.getElementsByClassName("waveformSelect"));
 const envelopeInputs = Array.from(document.getElementsByClassName("envelopeSlider"));
+const filterFreqSlider = document.getElementById("filter-freq-slider");
+const filterQSlider = document.getElementById("filter-q-slider");
+const filterTypesSelect = document.getElementById("filter-types-select");
 
 const synth = new Tone.PolySynth(Tone.Synth);
+let filter = new Tone.Filter(0, "lowpass");
 
 //// DIALOG INIT
 // show modal on page load
@@ -19,7 +23,7 @@ dialogCloseButton.addEventListener("click", () => {
 introDialog.addEventListener("close", toneInit);
 
 function toneInit(){
-    synth.toDestination();
+    synth.chain(filter, Tone.Destination);
 }
 
 const defaultPreset = {
@@ -28,7 +32,10 @@ const defaultPreset = {
     attack: 0.005,
     decay: 0.1,
     sustain: 0.3,
-    release: 1
+    release: 1,
+    filterType: "highpass",
+    filterFreq: 18000,
+    filterQ: 1
 }
 
 // update synth values and UI to reflect default presets
@@ -36,6 +43,8 @@ changeVolume(defaultPreset.volume);
 volumeSlider.value = defaultPreset.volume;
 changeOscillatorType(defaultPreset.oscType);
 document.getElementById(`${defaultPreset.oscType}-select`).checked = true;
+filterFreqSlider.value = defaultPreset.filterFreq;
+changeFilterFreq(defaultPreset.filterFreq);
 
 function changeVolume(newVolume){
     // then we set the volume of the synth based on this : this is a Tone.js specific method, run on the synth
@@ -84,4 +93,35 @@ envelopeInputs.forEach((input) => {
             }
         })
     });
+});
+
+function changeFilterType(newFilterType){
+
+        filter.set({
+            type: newFilterType
+        });
+
+}
+
+filterTypesSelect.addEventListener("input", (e) => {
+    changeFilterType(e.target.value);
+})
+
+function changeFilterFreq(newFilterFreq){
+    filter.frequency.value = newFilterFreq;
+}
+
+filterFreqSlider.addEventListener("input", (e) => {
+    changeFilterFreq(e.target.value);
+})
+
+function changeFilterQ(newFilterQ){
+    /* check to see if parameter within expected range */
+    if ( newFilterQ >= 0 && newFilterQ < 20){
+        filter.Q.value = newFilterQ;
+    }
+}
+
+filterQSlider.addEventListener("input", (e) => {
+   changeFilterQ(e.target.value)
 });
