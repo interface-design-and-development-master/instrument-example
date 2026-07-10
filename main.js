@@ -1,4 +1,5 @@
-
+const myCanvas = document.getElementById("svgCanvas");
+const adsrLine = document.getElementById("adsr-line");
 const introDialog = document.getElementById("intro-dialog");
 const dialogCloseButton = document.getElementById("dialog-close-button");
 const volumeSlider = document.getElementById("volume-slider");
@@ -91,7 +92,8 @@ envelopeInputs.forEach((input) => {
             envelope: {
                 [input.dataset.env]: e.target.value
             }
-        })
+        });
+        plotADSR();
     });
 });
 
@@ -125,3 +127,33 @@ function changeFilterQ(newFilterQ){
 filterQSlider.addEventListener("input", (e) => {
    changeFilterQ(e.target.value)
 });
+
+function plotADSR(){
+    // first find env values and add up envelope time
+    let envValues = {};
+    let totalTime = 0;
+    envelopeInputs.forEach((input) =>{
+        if(input.dataset.env !== "sustain"){
+            totalTime += parseFloat(input.value);
+        }
+        envValues[`${input.dataset.env}`] = input.value;
+    });
+    //sustain is a percentage of volume not a time measurement, so we'll instead make it a quarter of the length
+    let sustainQuarter = totalTime / 3;
+    totalTime += sustainQuarter;
+    // then work out percentages (canvas is 100 units wide)
+    // they keep adding on each other so need to factor that in
+    let attackLength = envValues.attack / totalTime * 100;
+    let decayLength = attackLength + (envValues.decay / totalTime * 100);
+    // we know sustain is set to 1 sec by default, so we also need to work out height
+    let sustainLength = decayLength + (sustainQuarter / totalTime * 100);
+    let sustainHeight = 25 - (envValues.sustain * 25);
+    // then we plot points based on this
+    let pointsList = `0,25
+                      ${attackLength},0
+                      ${decayLength},${sustainHeight}
+                      ${sustainLength},${sustainHeight}
+                      ${100},25`;
+    adsrLine.setAttribute("points", pointsList);
+}
+plotADSR();

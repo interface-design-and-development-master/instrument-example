@@ -163,3 +163,12 @@ input[type="range"]:focus::-moz-range-thumb{
     outline: 0.1rem solid var(--col03);
     outline-offset: 0.125rem;
 }
+
+#svgCanvas{
+    width: 100%;
+    aspect-ratio: 4/1;
+}
+
+fieldset{
+    padding: 1rem;
+}
