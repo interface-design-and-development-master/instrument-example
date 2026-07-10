@@ -37,18 +37,16 @@ body {
     flex-direction: column;
     /*align-items: center;*/
     gap: 2rem;
-    max-width: 1280px;
+
     padding: 0 3rem;
     margin: 0 auto;
     line-height: 1.5;
 }
 
 main {
+    max-width: 1280px;
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
+    display: grid;
     padding-top: 1rem;
 }
 
@@ -60,4 +58,83 @@ dialog[open] {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+}
+
+h1 {
+    color: var(--col02);
+    /*
+    Source - https://stackoverflow.com/a/23981970
+    Posted by ancestral, modified by community. See post 'Timeline' for change history
+    Retrieved 2026-07-10, License - CC BY-SA 3.0
+    */
+    -webkit-text-stroke: 0.0625rem var(--col01);
+
+}
+
+/*range css from: https://range-input-css.netlify.app/*/
+
+/*********** Baseline, reset styles ***********/
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    width: 25rem;
+}
+
+/* Removes default focus */
+input[type="range"]:focus {
+    outline: none;
+}
+
+/******** Chrome, Safari, Opera and Edge Chromium styles ********/
+/* slider track */
+input[type="range"]::-webkit-slider-runnable-track {
+    background-color: var(--col01);
+    border-radius: 0.5rem;
+    height: 0.25rem;
+}
+
+/* slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    margin-top: -4px; /* Centers thumb on the track */
+    /*background-color: #808080;*/
+    background: linear-gradient(to left, var(--col01) -50%, var(--col02) 30% 70%, var(--col01) 150%);
+    border: var(--col01) solid 0.0625rem;
+    border-radius: 0.5rem;
+    height: 1rem;
+    width: 2rem;
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+    background: linear-gradient(to left, var(--col05) -5%, var(--col03) 40% 60%, var(--col05) 105%);
+    outline: 0.1rem solid var(--col03);
+    outline-offset: 0.125rem;
+}
+
+/*********** Firefox styles ***********/
+/* slider track */
+input[type="range"]::-moz-range-track {
+    background-color: var(--col01);
+    border-radius: 0.5rem;
+    height: 0.25rem;
+}
+
+/* slider thumb */
+input[type="range"]::-moz-range-thumb {
+    /*background-color: #808080;*/
+    background: linear-gradient(to left, var(--col01) -50%, var(--col02) 30% 70%, var(--col01) 150%);
+    /*border: none; !*Removes extra border that FF applies*!*/
+    border: var(--col01) solid 0.0625rem;
+    border-radius: 0.5rem;
+    height: 1rem;
+    width: 2rem;
+}
+
+input[type="range"]:focus::-moz-range-thumb{
+    background: linear-gradient(to left, var(--col05) -5%, var(--col03) 40% 60%, var(--col05) 105%);
+    outline: 0.1rem solid var(--col03);
+    outline-offset: 0.125rem;
 }
