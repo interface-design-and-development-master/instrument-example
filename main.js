@@ -1,4 +1,4 @@
-const myCanvas = document.getElementById("svgCanvas");
+const myCanvas = document.getElementById("adsr-svg-canvas");
 const adsrLine = document.getElementById("adsr-line");
 const introDialog = document.getElementById("intro-dialog");
 const dialogCloseButton = document.getElementById("dialog-close-button");
@@ -30,7 +30,7 @@ function toneInit(){
 const defaultPreset = {
     volume: 0,
     oscType: "square",
-    attack: 0.005,
+    attack: 0.01,
     decay: 0.1,
     sustain: 0.3,
     release: 1,
@@ -86,6 +86,7 @@ function changeOscillatorType(newOscType){
 envelopeInputs.forEach((input) => {
     // we're looping anyway so get the default value in there
     input.value = defaultPreset[input.dataset.env];
+    input.nextElementSibling.textContent = defaultPreset[input.dataset.env];
     input.addEventListener("input", (e) => {
         // here we're using the stored data attribute to set the appropriate value
         synth.set({
@@ -93,6 +94,7 @@ envelopeInputs.forEach((input) => {
                 [input.dataset.env]: e.target.value
             }
         });
+        input.nextElementSibling.textContent = e.target.value;
         plotADSR();
     });
 });
@@ -150,7 +152,7 @@ function plotADSR(){
     let sustainHeight = 25 - (envValues.sustain * 25);
     // then we plot points based on this
     let pointsList = `0,25
-                      ${attackLength},0
+                      ${attackLength},3
                       ${decayLength},${sustainHeight}
                       ${sustainLength},${sustainHeight}
                       ${100},25`;

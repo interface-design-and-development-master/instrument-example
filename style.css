@@ -47,17 +47,29 @@ main {
     max-width: 1280px;
     background-color: var(--col02);
     padding: 1rem;
+    gap: 1rem;
     flex: 1;
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: auto auto auto;
 }
 
-section{
+section {
     padding: 1rem;
+    border: var(--border);
+    border-color: var(--col05);
+    border-radius: 1rem;
+}
+.infoSection {
+    border: none;
 }
 .keyboardSection {
+    border: none;
     grid-column: 1/3;
+}
+.timbreSection {
+    display: flex;
+
 }
 /*intro modal dialog*/
 dialog[open] {
@@ -164,9 +176,16 @@ input[type="range"]:focus::-moz-range-thumb{
     outline-offset: 0.125rem;
 }
 
-#svgCanvas{
+.adsrBox{
     width: 100%;
     aspect-ratio: 4/1;
+    border: var(--border);
+    border-color: var(--col05);
+    border-radius: 1rem;
+    padding: 0.25rem 1rem;
+}
+#adsr-svg-canvas{
+
 }
 
 fieldset{

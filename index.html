@@ -15,7 +15,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/15.3.5/Tone.js" integrity="sha512-F1myjNkIKU5XJtOs1HXRo/zOjiUsABgFEEGKLx/riwK82jRThZFebEnfF2HWo9eeC+iC1Nwwnn9Vj6OGq+r7rQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script src="adsrGen.js" defer></script>
     <script src="main.js" defer></script>
     <script src="keyboardController.js" defer></script>
 </head>
@@ -46,26 +45,64 @@
     </section>
 
     <section class="timbreSection">
+        <h2>Timbre</h2>
         <fieldset>
             <legend>Select a wave form:</legend>
 
             <label>
                 <input type="radio" id="sine-select" class="waveformSelect" name="waveform" value="sine" />
+                <svg id="sine-svg" width="1.5rem" height="1.5rem" viewBox="0 0 100 100"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path stroke="var(--col01)" stroke-width="0.25rem" fill-opacity="0"
+                          d="M 0,50
+                             Q 25,0 50,50
+                             Q 75,100 100,50
+                             "/>
+                </svg>
                 Sine
             </label>
 
             <label>
                 <input type="radio" id="square-select" class="waveformSelect" name="waveform" value="square" />
+                <svg id="sine-svg" width="1.5rem" height="1.5rem" viewBox="0 0 100 100"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path stroke="var(--col01)" stroke-width="0.25rem" fill-opacity="0"
+                          d="M 3,75
+                             L 3,25
+                             L 50,25
+                             L 50,75
+                             L 97,75
+                             L 97,25
+                             "/>
+                </svg>
                 Square
             </label>
 
             <label>
                 <input type="radio" id="triangle-select" class="waveformSelect" name="waveform" value="triangle" />
+                <svg id="sine-svg" width="1.5rem" height="1.5rem" viewBox="0 0 100 100"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path stroke="var(--col01)" stroke-width="0.25rem" fill-opacity="0"
+                          d="M 3,75
+                             L 33,25
+                             L 66,75
+                             L 97,25
+                             "/>
+                </svg>
                 Triangle
             </label>
 
             <label>
                 <input type="radio" id="sawtooth-select" class="waveformSelect" name="waveform" value="sawtooth" />
+                <svg id="sine-svg" width="1.5rem" height="1.5rem" viewBox="0 0 100 100"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path stroke="var(--col01)" stroke-width="0.25rem" fill-opacity="0"
+                          d="M 3,35
+                             L 50,75
+                             L 50,25
+                             L 97,65
+                             "/>
+                </svg>
                 Sawtooth
             </label>
 
@@ -95,42 +132,47 @@
 
         </fieldset>
     </section>
-    <section class="envelopeSection">
-        <fieldset>
-            <legend>Envelope:</legend>
 
-            <svg id="svgCanvas" width="100%" height="100%" viewBox="0 0 100 25"
+    <section class="envelopeSection">
+        <h2>Envelope</h2>
+        <div class="adsrBox">
+            <svg id="adsr-svg-canvas" width="100%" height="100%" viewBox="0 0 100 25"
                  xmlns="http://www.w3.org/2000/svg">
 
                 <polyline id="adsr-line" points="" stroke="var(--col01)" stroke-width="0.025rem" fill-opacity="0"></polyline>
 
             </svg>
+        </div>
 
-            <label>
-                <input type="range" name="attack" id="attack-slider" class="envelopeSlider" data-env="attack"
-                       min="0" max="10" step="0.001">
-                Attack
-            </label>
+        <label>
+            <input type="range" name="attack" id="attack-slider" class="envelopeSlider" data-env="attack"
+                   min="0" max="10" step="0.01">
+            <span id="attack-value"></span>
+            Attack
+        </label>
 
-            <label>
-                <input type="range" name="attack" id="decay-slider" class="envelopeSlider" data-env="decay"
-                       min="0" max="10" step="0.001">
-                Decay
-            </label>
+        <label>
+            <input type="range" name="decay" id="decay-slider" class="envelopeSlider" data-env="decay"
+                   min="0" max="10" step="0.01">
+            <span id="decay-value"></span>
+            Decay
+        </label>
 
-            <label>
-                <input type="range" name="attack" id="sustain-slider" class="envelopeSlider" data-env="sustain"
-                       min="0" max="1" step="0.01">
-                Sustain
-            </label>
+        <label>
+            <input type="range" name="sustain" id="sustain-slider" class="envelopeSlider" data-env="sustain"
+                   min="0" max="1" step="0.01">
+            <span id="sustain-value"></span>
+            Sustain
+        </label>
 
-            <label>
-                <input type="range" name="attack" id="release-slider" class="envelopeSlider" data-env="release"
-                       min="0" max="10" step="0.001">
-                Release
-            </label>
-        </fieldset>
+        <label>
+            <input type="range" name="release" id="release-slider" class="envelopeSlider" data-env="release"
+                   min="0" max="10" step="0.01">
+            <span id="release-value"></span>
+            Release
+        </label>
     </section>
+
     <section class="keyboardSection">
         <!--
         This is a template for a keyboard controller : we will look at building this style of
