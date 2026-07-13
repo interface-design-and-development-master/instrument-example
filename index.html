@@ -41,96 +41,96 @@
             </div>
             <label for="volume-slider">Volume</label>
         </div>
-        
+        <div id="volume-feedback"></div>
     </section>
 
     <section class="timbreSection">
         <h2>Timbre</h2>
-        <fieldset>
-            <legend>Select a wave form:</legend>
-
-            <label>
-                <input type="radio" id="sine-select" class="waveformSelect" name="waveform" value="sine" />
-                <svg id="sine-svg" width="1.5rem" height="1.5rem" viewBox="0 0 100 100"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path stroke="var(--col01)" stroke-width="0.25rem" fill-opacity="0"
-                          d="M 0,50
+        <div class="timbreBox">
+            <div class="waveformBox">
+                <h3>Waveform</h3>
+                <label>
+                    <input type="radio" id="sine-select" class="waveformSelect" name="waveform" value="sine" />
+                    <svg id="sine-svg" width="1.5rem" height="1.5rem" viewBox="0 0 100 100"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path stroke="var(--col01)" stroke-width="0.25rem" fill-opacity="0"
+                              d="M 0,50
                              Q 25,0 50,50
                              Q 75,100 100,50
                              "/>
-                </svg>
-                Sine
-            </label>
+                    </svg>
+                    Sine
+                </label>
 
-            <label>
-                <input type="radio" id="square-select" class="waveformSelect" name="waveform" value="square" />
-                <svg id="sine-svg" width="1.5rem" height="1.5rem" viewBox="0 0 100 100"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path stroke="var(--col01)" stroke-width="0.25rem" fill-opacity="0"
-                          d="M 3,75
+                <label>
+                    <input type="radio" id="square-select" class="waveformSelect" name="waveform" value="square" />
+                    <svg id="sine-svg" width="1.5rem" height="1.5rem" viewBox="0 0 100 100"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path stroke="var(--col01)" stroke-width="0.25rem" fill-opacity="0"
+                              d="M 3,75
                              L 3,25
                              L 50,25
                              L 50,75
                              L 97,75
                              L 97,25
                              "/>
-                </svg>
-                Square
-            </label>
+                    </svg>
+                    Square
+                </label>
 
-            <label>
-                <input type="radio" id="triangle-select" class="waveformSelect" name="waveform" value="triangle" />
-                <svg id="sine-svg" width="1.5rem" height="1.5rem" viewBox="0 0 100 100"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path stroke="var(--col01)" stroke-width="0.25rem" fill-opacity="0"
-                          d="M 3,75
+                <label>
+                    <input type="radio" id="triangle-select" class="waveformSelect" name="waveform" value="triangle" />
+                    <svg id="sine-svg" width="1.5rem" height="1.5rem" viewBox="0 0 100 100"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path stroke="var(--col01)" stroke-width="0.25rem" fill-opacity="0"
+                              d="M 3,75
                              L 33,25
                              L 66,75
                              L 97,25
                              "/>
-                </svg>
-                Triangle
-            </label>
+                    </svg>
+                    Triangle
+                </label>
 
-            <label>
-                <input type="radio" id="sawtooth-select" class="waveformSelect" name="waveform" value="sawtooth" />
-                <svg id="sine-svg" width="1.5rem" height="1.5rem" viewBox="0 0 100 100"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path stroke="var(--col01)" stroke-width="0.25rem" fill-opacity="0"
-                          d="M 3,35
+                <label>
+                    <input type="radio" id="sawtooth-select" class="waveformSelect" name="waveform" value="sawtooth" />
+                    <svg id="sine-svg" width="1.5rem" height="1.5rem" viewBox="0 0 100 100"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path stroke="var(--col01)" stroke-width="0.25rem" fill-opacity="0"
+                              d="M 3,35
                              L 50,75
                              L 50,25
                              L 97,65
                              "/>
-                </svg>
-                Sawtooth
-            </label>
+                    </svg>
+                    Sawtooth
+                </label>
+            </div>
 
-        </fieldset>
-        <fieldset>
-            <legend>Filter:</legend>
+            <div class="filterBox">
+                <h3>Filter</h3>
+                <label>
+                    Filter Type
+                    <select name="filter-types" id="filter-types-select">
+                        <option value="lowpass">Lowpass</option>
+                        <option value="highpass">Highpass</option>
+                        <option value="bandpass">Bandpass</option>
+                        <option value="notch">Notch</option>
+                    </select>
+                </label>
 
-            <label>
-                Filter Type
-                <select name="filter-types" id="filter-types-select">
-                    <option value="lowpass">Lowpass</option>
-                    <option value="highpass">Highpass</option>
-                    <option value="bandpass">Bandpass</option>
-                    <option value="notch">Notch</option>
-                </select>
-            </label>
+                <label>
+                    <input type="range" name="attack" id="filter-freq-slider" min="0" max="20000">
+                    Frequency
+                </label>
 
-            <label>
-                <input type="range" name="attack" id="filter-freq-slider" min="0" max="20000">
-                Frequency
-            </label>
+                <label>
+                    <input type="range" name="attack" id="filter-q-slider" min="0" max="20" step="0.01">
+                    Q
+                </label>
+            </div>
+        </div>
 
-            <label>
-                <input type="range" name="attack" id="filter-q-slider" min="0" max="20" step="0.01">
-                Q
-            </label>
-
-        </fieldset>
     </section>
 
     <section class="envelopeSection">
@@ -144,33 +144,33 @@
             </svg>
         </div>
 
-        <label>
+        <div class="envelopeInput">
             <input type="range" name="attack" id="attack-slider" class="envelopeSlider" data-env="attack"
                    min="0" max="10" step="0.01">
-            <span id="attack-value"></span>
-            Attack
-        </label>
+            <span id="attack-value">0.00</span>
+            <label for="attack-slider">Attack</label>
+        </div>
 
-        <label>
+        <div class="envelopeInput">
             <input type="range" name="decay" id="decay-slider" class="envelopeSlider" data-env="decay"
                    min="0" max="10" step="0.01">
-            <span id="decay-value"></span>
-            Decay
-        </label>
+            <span id="decay-value">0.00</span>
+            <label for="decay-slider">Decay</label>
+        </div>
 
-        <label>
+        <div class="envelopeInput">
             <input type="range" name="sustain" id="sustain-slider" class="envelopeSlider" data-env="sustain"
                    min="0" max="1" step="0.01">
-            <span id="sustain-value"></span>
-            Sustain
-        </label>
+            <span id="sustain-value">0.00</span>
+            <label for="sustain-slider">Sustain</label>
+        </div>
 
-        <label>
+        <div class="envelopeInput">
             <input type="range" name="release" id="release-slider" class="envelopeSlider" data-env="release"
                    min="0" max="10" step="0.01">
-            <span id="release-value"></span>
-            Release
-        </label>
+            <span id="release-value">0.00</span>
+            <label for="release-slider">Release</label>
+        </div>
     </section>
 
     <section class="keyboardSection">

@@ -9,9 +9,14 @@ const envelopeInputs = Array.from(document.getElementsByClassName("envelopeSlide
 const filterFreqSlider = document.getElementById("filter-freq-slider");
 const filterQSlider = document.getElementById("filter-q-slider");
 const filterTypesSelect = document.getElementById("filter-types-select");
+const volumeFeedback = document.getElementById("volume-feedback");
 
 const synth = new Tone.PolySynth(Tone.Synth);
-let filter = new Tone.Filter(0, "lowpass");
+// synth.volume.value = 12;
+const filter = new Tone.Filter(0, "lowpass");
+const meter = new Tone.Meter();
+meter.normalRange = true;
+//meter.smoothing = 0.1;
 
 //// DIALOG INIT
 // show modal on page load
@@ -24,7 +29,7 @@ dialogCloseButton.addEventListener("click", () => {
 introDialog.addEventListener("close", toneInit);
 
 function toneInit(){
-    synth.chain(filter, Tone.Destination);
+    synth.chain(filter, meter, Tone.Destination);
 }
 
 const defaultPreset = {
@@ -86,7 +91,7 @@ function changeOscillatorType(newOscType){
 envelopeInputs.forEach((input) => {
     // we're looping anyway so get the default value in there
     input.value = defaultPreset[input.dataset.env];
-    input.nextElementSibling.textContent = defaultPreset[input.dataset.env];
+    input.nextElementSibling.textContent = parseFloat(defaultPreset[input.dataset.env]).toFixed(2);
     input.addEventListener("input", (e) => {
         // here we're using the stored data attribute to set the appropriate value
         synth.set({
@@ -94,7 +99,7 @@ envelopeInputs.forEach((input) => {
                 [input.dataset.env]: e.target.value
             }
         });
-        input.nextElementSibling.textContent = e.target.value;
+        input.nextElementSibling.textContent = parseFloat(e.target.value).toFixed(2);
         plotADSR();
     });
 });
@@ -159,3 +164,20 @@ function plotADSR(){
     adsrLine.setAttribute("points", pointsList);
 }
 plotADSR();
+
+
+/// metering
+let meterRunning = true;
+let meterValue;
+
+function meterVolume() {
+    meterValue = meter.getValue();
+    if(meterValue < 0.001){
+        meterValue = 0;
+    }
+    volumeFeedback.style.backgroundColor = `color-mix(in hsl, var(--col06) ${meterValue*100}%, var(--col04))`;
+    if(meterRunning){
+        requestAnimationFrame(meterVolume);
+    }
+}
+requestAnimationFrame(meterVolume);

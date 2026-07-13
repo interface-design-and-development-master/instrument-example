@@ -69,7 +69,15 @@ section {
 }
 .timbreSection {
     display: flex;
-
+    flex-direction: column;
+}
+.timbreBox {
+    display: flex;
+}
+.envelopeSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 /*intro modal dialog*/
 dialog[open] {
@@ -94,6 +102,15 @@ h1 {
 label{
     display: flex;
     gap: 1rem;
+}
+
+.envelopeInput{
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+    label {
+        margin-left: auto;
+    }
 }
 
 /*this holds the slider and the label*/
@@ -190,4 +207,10 @@ input[type="range"]:focus::-moz-range-thumb{
 
 fieldset{
     padding: 1rem;
+}
+
+#volume-feedback{
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--col04);
 }
