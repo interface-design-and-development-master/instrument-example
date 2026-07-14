@@ -11,7 +11,7 @@
     --col04: #5b5d70;
     --col05: #74838c;
     --col06: #f69197;
-    --border: solid 2px var(--col01);
+    --border: solid 0.125rem var(--col01);
 }
 
 /*reorder colours for dark mode*/
@@ -25,7 +25,7 @@
         --col04: #74838c;
         --col05: #5b5d70;
         --col06: #ffc4b8;
-        --border: solid 2px var(--col01);
+        --border: solid 0.125rem var(--col01);
     }
 }
 
@@ -217,7 +217,10 @@ fieldset{
 }
 
 #volume-feedback{
-    width: 1rem;
-    height: 1rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 1rem;
+    border: double 0.25rem var(--col05);
     background-color: var(--col04);
+    background-clip: padding-box;
 }
