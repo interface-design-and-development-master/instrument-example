@@ -8,7 +8,7 @@ const defaultPreset = {
     decay: 0.1,
     sustain: 0.3,
     release: 1,
-    filterType: "highpass",
+    filterType: "lowpass",
     filterFreq: 18000,
     filterQ: 1
 };
@@ -48,6 +48,8 @@ meter.normalRange = true;
 // function only runs once user has closed the intro dialog
 function toneInit(){
     synth.chain(filter, meter, Tone.Destination);
+    // run the keyboard control init : see keyboardController.js
+    keyboardControlInit();
 }
 // update the settings from the preset
 // while we only have the default at the moment, we'll write it as a function so alternate presets could be implemented
