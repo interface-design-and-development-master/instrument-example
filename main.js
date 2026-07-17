@@ -64,8 +64,10 @@ function loadPreset(preset){
     filterTypesSelect.value = preset.filterType;
     changeFilterType(preset.filterType);
     filterFreqSlider.value = preset.filterFreq;
+    filterFreqSlider.nextElementSibling.textContent = parseInt(preset.filterFreq);
     changeFilterFreq(preset.filterFreq);
     filterQSlider.value = preset.filterQ;
+    filterQSlider.nextElementSibling.textContent = parseFloat(preset.filterQ).toFixed(2);
     changeFilterQ(preset.filterQ);
     // because the envelope inputs are stored in an array we need to loop through them
     envelopeInputs.forEach((input) => {
@@ -157,13 +159,15 @@ function changeFilterFreq(newFilterFreq){
 }
 filterFreqSlider.addEventListener("input", (e) => {
     changeFilterFreq(e.target.value);
+    e.target.nextElementSibling.textContent = parseInt(e.target.value);
 })
 
 function changeFilterQ(newFilterQ){
     filter.Q.value = newFilterQ;
 }
 filterQSlider.addEventListener("input", (e) => {
-    changeFilterQ(e.target.value)
+    changeFilterQ(e.target.value);
+    e.target.nextElementSibling.textContent = parseFloat(e.target.value).toFixed(2);
 });
 
 // like the waveform inputs we're looping through the array of envelope inputs and adding an event listerner to each

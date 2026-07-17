@@ -186,12 +186,45 @@ Timbre Section
 .filterSliderGrid {
     display: grid;
     grid-template-rows: auto auto;
-    grid-template-columns: auto min-content;
+    grid-template-columns: auto 5ch min-content;
     gap: 1rem;
+    span {
+        /*need to use monospace to handle different values changing the spacing*/
+        font-variant-numeric: tabular-nums;
+        text-align: right;
+    }
+}
+
+/**
+Envelope Section
+**/
+/*do i need?*/
+.envelopeSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.envelopeSliderGrid {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: auto 5ch min-content;
+    gap: 1rem;
+    span {
+        /*need to use monospace to handle different values changing the spacing*/
+        font-variant-numeric: tabular-nums;
+        text-align: right;
+    }
 }
 
 
-
+.adsrBox{
+    width: 100%;
+    aspect-ratio: 4/1;
+    border: var(--border);
+    border-color: var(--col05);
+    border-radius: 1rem;
+    padding: 0.25rem 1rem;
+}
 
 .keyboardSection {
     border: none;
@@ -202,11 +235,7 @@ Timbre Section
     flex-direction: column;
 }
 
-.envelopeSection {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
+
 
 
 
@@ -341,24 +370,7 @@ select {
 
 
 
-.adsrBox{
-    width: 100%;
-    aspect-ratio: 4/1;
-    border: var(--border);
-    border-color: var(--col05);
-    border-radius: 1rem;
-    padding: 0.25rem 1rem;
-}
 
-.envelopeBox, .waveformBox, .filterBox {
-    border: var(--border);
-    border-color: var(--col04);
-    border-radius: 1rem;
-    padding: 1rem;
-}
 
-fieldset{
-    padding: 1rem;
-}
 
 

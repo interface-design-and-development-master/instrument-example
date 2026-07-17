@@ -126,6 +126,7 @@ This favicon was generated using the following graphics from Twitter Twemoji:
                         </svg>
                         Sawtooth
                     </label>
+
                 </div>
     
                 <div class="componentBox filterBox">
@@ -135,18 +136,24 @@ This favicon was generated using the following graphics from Twitter Twemoji:
                     <label for="filter-types-select">
                         Filter Type:
                         <select name="filter-types" id="filter-types-select">
+
                             <option value="lowpass">Lowpass</option>
                             <option value="highpass">Highpass</option>
                             <option value="bandpass">Bandpass</option>
                             <option value="notch">Notch</option>
+
                         </select>
                     </label>
 
                     <div class="filterSliderGrid">
+
                         <input type="range" name="attack" id="filter-freq-slider" min="0" max="20000">
+                        <span id="freq-value">20000</span>
                         <label for="filter-freq-slider">Frequency</label>
                         <input type="range" name="attack" id="filter-q-slider" min="0" max="20" step="0.01">
+                        <span id="q-value">20</span>
                         <label for="filter-q-slider">Q</label>
+
                     </div>
                 </div>
             </div>
@@ -154,44 +161,46 @@ This favicon was generated using the following graphics from Twitter Twemoji:
         </section>
     
         <section class="envelopeSection">
+
             <h2>Envelope</h2>
-            <div class="adsrBox">
-                <svg id="adsr-svg-canvas" width="100%" height="100%" viewBox="0 0 100 25"
-                     xmlns="http://www.w3.org/2000/svg">
+
+
     
-                    <polyline id="adsr-line" points="" stroke="var(--col01)" stroke-width="0.025rem" fill-opacity="0"></polyline>
-    
-                </svg>
-            </div>
-    
-            <div class="envelopeBox">
-                <div class="envelopeInput">
+            <div class="componentBox">
+
+                <div class="adsrBox">
+                    <svg id="adsr-svg-canvas" width="100%" height="100%" viewBox="0 0 100 25"
+                         xmlns="http://www.w3.org/2000/svg">
+
+                        <polyline id="adsr-line" points="" stroke="var(--col01)" stroke-width="0.025rem" fill-opacity="0"></polyline>
+
+                    </svg>
+                </div>
+
+                <div class="envelopeSliderGrid">
+
                     <input type="range" name="attack" id="attack-slider" class="envelopeSlider" data-env="attack"
                            min="0" max="10" step="0.01">
                     <span id="attack-value">0.00</span>
                     <label for="attack-slider">Attack</label>
-                </div>
-    
-                <div class="envelopeInput">
+
                     <input type="range" name="decay" id="decay-slider" class="envelopeSlider" data-env="decay"
                            min="0" max="10" step="0.01">
                     <span id="decay-value">0.00</span>
                     <label for="decay-slider">Decay</label>
-                </div>
-    
-                <div class="envelopeInput">
+
                     <input type="range" name="sustain" id="sustain-slider" class="envelopeSlider" data-env="sustain"
                            min="0" max="1" step="0.01">
                     <span id="sustain-value">0.00</span>
                     <label for="sustain-slider">Sustain</label>
-                </div>
-    
-                <div class="envelopeInput">
+
                     <input type="range" name="release" id="release-slider" class="envelopeSlider" data-env="release"
                            min="0" max="10" step="0.01">
                     <span id="release-value">0.00</span>
                     <label for="release-slider">Release</label>
+
                 </div>
+
             </div>
     
         </section>
