@@ -1,23 +1,39 @@
 //////////
+///// Synth settings to load into synth and UI on page load
+//////////
+const defaultPreset = {
+    volume: 0,
+    oscType: "square",
+    attack: 0.01,
+    decay: 0.1,
+    sustain: 0.3,
+    release: 1,
+    filterType: "highpass",
+    filterFreq: 18000,
+    filterQ: 1
+};
+
+//////////
 ///// Find the elements I need
 //////////
+// dialog elements
 const introDialog = document.getElementById("intro-dialog");
 const introDialogCloseButton = document.getElementById("intro-dialog-close-button");
 const infoButton = document.getElementById("info-button");
 const infoDialog = document.getElementById("info-dialog");
 const infoDialogCloseButton = document.getElementById("info-dialog-close-button");
-
-const myCanvas = document.getElementById("adsr-svg-canvas");
-const adsrLine = document.getElementById("adsr-line");
-
+// input elements
 const volumeSlider = document.getElementById("volume-slider");
 // find all the waveform select radio inputs and make them into an array
 const waveformInputs = Array.from(document.getElementsByClassName("waveformSelect"));
-const envelopeInputs = Array.from(document.getElementsByClassName("envelopeSlider"));
+const filterTypesSelect = document.getElementById("filter-types-select");
 const filterFreqSlider = document.getElementById("filter-freq-slider");
 const filterQSlider = document.getElementById("filter-q-slider");
-const filterTypesSelect = document.getElementById("filter-types-select");
+// find all the envelope range inputs and make them into an array
+const envelopeInputs = Array.from(document.getElementsByClassName("envelopeSlider"));
+// feedback elements
 const volumeFeedback = document.getElementById("volume-feedback");
+const adsrLine = document.getElementById("adsr-line");
 
 //////////
 ///// Initialise Tone instrument and effects
@@ -33,6 +49,36 @@ meter.normalRange = true;
 function toneInit(){
     synth.chain(filter, meter, Tone.Destination);
 }
+// update the settings from the preset
+// while we only have the default at the moment, we'll write it as a function so alternate presets could be implemented
+function loadPreset(preset){
+    // each setting should update both tone and UI
+    // the tone setting functions are included in a section below
+    changeVolume(preset.volume);
+    volumeSlider.value = preset.volume;
+    changeOscillatorType(preset.oscType);
+    // work out which box to check based on setting
+    document.getElementById(`${preset.oscType}-select`).checked = true;
+    filterTypesSelect.value = preset.filterType;
+    changeFilterType(preset.filterType);
+    filterFreqSlider.value = preset.filterFreq;
+    changeFilterFreq(preset.filterFreq);
+    filterQSlider.value = preset.filterQ;
+    changeFilterQ(preset.filterQ);
+    // because the envelope inputs are stored in an array we need to loop through them
+    envelopeInputs.forEach((input) => {
+        // each envelope has their "type" stored as a data-attribute in HTML, so we can use that to retrieve the correct
+        // preset value
+        input.value = preset[input.dataset.env];
+        // for consistency, we also want to make sure the value of the envelope inputs is always to 2 decimal places,
+        // which means using the toFixed method on a float
+        input.nextElementSibling.textContent = parseFloat(preset[input.dataset.env]).toFixed(2);
+    });
+    // then we have to update the adsr feedback line : see full function below for more details
+    plotADSR();
+}
+// we can then run our function on page load and pass it our default preset
+loadPreset(defaultPreset);
 
 //////////
 ///// Dialog Setup
@@ -61,25 +107,12 @@ infoDialogCloseButton.addEventListener("click", () => {
 
 
 
-const defaultPreset = {
-    volume: 0,
-    oscType: "square",
-    attack: 0.01,
-    decay: 0.1,
-    sustain: 0.3,
-    release: 1,
-    filterType: "highpass",
-    filterFreq: 18000,
-    filterQ: 1
-}
+
 
 // update synth values and UI to reflect default presets
-changeVolume(defaultPreset.volume);
-volumeSlider.value = defaultPreset.volume;
-changeOscillatorType(defaultPreset.oscType);
-document.getElementById(`${defaultPreset.oscType}-select`).checked = true;
-filterFreqSlider.value = defaultPreset.filterFreq;
-changeFilterFreq(defaultPreset.filterFreq);
+
+
+
 
 function changeVolume(newVolume){
     // then we set the volume of the synth based on this : this is a Tone.js specific method, run on the synth
@@ -192,7 +225,7 @@ function plotADSR(){
                       ${100},25`;
     adsrLine.setAttribute("points", pointsList);
 }
-plotADSR();
+
 
 
 /// metering
