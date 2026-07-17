@@ -179,17 +179,20 @@ Timbre Section
 .timbreSection {
     display: flex;
     flex-direction: column;
-    align-self: end;
 }
 .timbreBox {
     display: flex;
     gap: 1rem;
+    flex: 1;
 }
 .filterBox {
+    justify-content: space-between;
     flex: 1;
 }
 .filterSliderGrid {
+    flex: 1;
     display: grid;
+    align-items: center;
     grid-template-rows: auto auto;
     grid-template-columns: auto 5ch min-content;
     gap: 1rem;
@@ -207,7 +210,7 @@ Envelope Section
     display: grid;
     grid-template-rows: auto auto;
     grid-template-columns: auto 5ch min-content;
-    gap: 1rem;
+    column-gap: 1rem;
     span {
         /*need to use monospace to handle different values changing the spacing*/
         font-variant-numeric: tabular-nums;
