@@ -99,48 +99,34 @@ infoDialogCloseButton.addEventListener("click", () => {
     infoDialog.close();
 });
 
-
-
-
-
-
-
-
-
-
-
-// update synth values and UI to reflect default presets
-
-
-
-
+//////////
+///// Input Setup
+//////////
+// here we're defining each value change as a separate function so it can be used when loading presets
+// then we're attaching that function to the relevant HTML input via event listeners
+// I thought about putting validation in here too, but maybe not needed if the inputs are set up properly
 function changeVolume(newVolume){
-    // then we set the volume of the synth based on this : this is a Tone.js specific method, run on the synth
-    // polySynth which is defined within toneSetup.js
-    synth.set({volume: newVolume});
+    // note that when changing a value on a tone element we usually have to use the set method and pass it an object like
+    // below. in rare cases we are instead able to set the value using JS operators, see the changeFilterFreq function for
+    // an example of this
+    synth.set({
+        volume: newVolume
+    });
 }
-
-/* then we add an eventlistener that triggers our function to the appropriate input */
+// note that while we might pass the function directly using the addEventListener, such as the commented line below:
+// volumeSlider.addEventListener("input", changeVolume);
+// we are instead using an anonymous function to retrieve the value from the event we've called e, and then passing it
+// to the appropriate function. this is because functions like changeVolume also need to work in the context of loading
+// presets, so they won't always have an associated event
 volumeSlider.addEventListener("input", (e) => {
     // volume decibels are a bit tricky because they have a logarithmic relationship to loudness
     // see here for a breakdown: https://www.outeraudio.com/understanding-loudness/
-
     // to actually mute our synth we detect when it is at the bottom of the slider range and then set the volume to -128
     if(e.target.value === volumeSlider.min){
         changeVolume(-128);
     } else {
         changeVolume(e.target.value);
     }
-
-});
-
-
-// loop through each radio input and add an eventlistener
-waveformInputs.forEach((input) => {
-    input.addEventListener("input", (e) => {
-        // set the oscillator type to the input value
-        changeOscillatorType(e.target.value);
-    });
 });
 
 function changeOscillatorType(newOscType){
@@ -148,76 +134,85 @@ function changeOscillatorType(newOscType){
         oscillator : { type: newOscType }
     });
 }
-
-// loop through each input and add eventlistener
-envelopeInputs.forEach((input) => {
-    // we're looping anyway so get the default value in there
-    input.value = defaultPreset[input.dataset.env];
-    input.nextElementSibling.textContent = parseFloat(defaultPreset[input.dataset.env]).toFixed(2);
+// as we've stored the waveform checkboxes in an array we can just loop through and add an eventlistener to each in turn
+waveformInputs.forEach((input) => {
     input.addEventListener("input", (e) => {
-        // here we're using the stored data attribute to set the appropriate value
-        synth.set({
-            envelope: {
-                [input.dataset.env]: e.target.value
-            }
-        });
-        input.nextElementSibling.textContent = parseFloat(e.target.value).toFixed(2);
-        plotADSR();
+        changeOscillatorType(e.target.value);
     });
 });
 
 function changeFilterType(newFilterType){
-
-        filter.set({
-            type: newFilterType
-        });
-
+    filter.set({
+        type: newFilterType
+    });
 }
-
 filterTypesSelect.addEventListener("input", (e) => {
     changeFilterType(e.target.value);
-})
+});
 
 function changeFilterFreq(newFilterFreq){
     filter.frequency.value = newFilterFreq;
 }
-
 filterFreqSlider.addEventListener("input", (e) => {
     changeFilterFreq(e.target.value);
 })
 
 function changeFilterQ(newFilterQ){
-    /* check to see if parameter within expected range */
-    if ( newFilterQ >= 0 && newFilterQ < 20){
-        filter.Q.value = newFilterQ;
-    }
+    filter.Q.value = newFilterQ;
 }
-
 filterQSlider.addEventListener("input", (e) => {
-   changeFilterQ(e.target.value)
+    changeFilterQ(e.target.value)
 });
 
+// like the waveform inputs we're looping through the array of envelope inputs and adding an event listerner to each
+envelopeInputs.forEach((input) => {
+    input.addEventListener("input", (e) => {
+        // here we're using the data-attribute stored in the HTML input to set the appropriate value
+        synth.set({
+            envelope: {
+                [input.dataset.env]: e.target.value
+            }
+        });
+        // we also need to make sure the value of the envelope inputs is always to 2 decimal places, see above for more details
+        input.nextElementSibling.textContent = parseFloat(e.target.value).toFixed(2);
+        // finally we need to trigger an update to the adsr feedback line
+        plotADSR();
+    });
+});
+
+//////////
+///// Feedback
+//////////
+// this will update the adsr envelope line whenever one of the values is updated
 function plotADSR(){
-    // first find env values and add up envelope time
+    // we need to store all the current values together
     let envValues = {};
+    // we also need to work out the envelopes total time to apply the appropriate width
     let totalTime = 0;
+    // loop through inputs and update the above variables
     envelopeInputs.forEach((input) =>{
+        // as sustain's value does not represent a time, only add the other values to the totalTime
         if(input.dataset.env !== "sustain"){
             totalTime += parseFloat(input.value);
         }
+        // add to object using their type as the key
         envValues[`${input.dataset.env}`] = input.value;
     });
     //sustain is a percentage of volume not a time measurement, so we'll instead make it a quarter of the length
     let sustainQuarter = totalTime / 3;
+    // then add it on to the totalTime
     totalTime += sustainQuarter;
-    // then work out percentages (canvas is 100 units wide)
-    // they keep adding on each other so need to factor that in
+    // then work out width as percentages (canvas is 100 units wide)
     let attackLength = envValues.attack / totalTime * 100;
+    // decayLength starts where attackLength stops, so we also need to add it on
     let decayLength = attackLength + (envValues.decay / totalTime * 100);
-    // we know sustain is set to 1 sec by default, so we also need to work out height
     let sustainLength = decayLength + (sustainQuarter / totalTime * 100);
-    let sustainHeight = 25 - (envValues.sustain * 25);
+    // if we actually set height to 0, the width of line means not total is shown, so we only give it a range of 23 instead
+    // of 25. this is only a rough visual feedback guide, so exact precision isn't so important
+    let sustainHeight = 25 - (envValues.sustain * 23);
     // then we plot points based on this
+    // see here for more details about how this works
+    // https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/polyline
     let pointsList = `0,25
                       ${attackLength},3
                       ${decayLength},${sustainHeight}
@@ -226,20 +221,28 @@ function plotADSR(){
     adsrLine.setAttribute("points", pointsList);
 }
 
-
-
-/// metering
+// this will update the volume "light" object based on the output volume
+// it's a pretty simple implementation of requestAnimationFrame, see here for more details about how it works
+// https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame
+// stores whether metering should run : currently always set to true, but could be interacted with if you wanted
 let meterRunning = true;
+// this will store the volume output, which currently is expected to be between 0 and 1 (although is sometimes a little out
+// of that range)
 let meterValue;
 
 function meterVolume() {
     meterValue = meter.getValue();
+    // see the changeVolume function above for a more detailed explanation, but basically making close to 0 equal 0
     if(meterValue < 0.001){
         meterValue = 0;
     }
+    // update our css using the color-mix function, which takes a percentage, so we just multiply our value by 100
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix
     volumeFeedback.style.backgroundColor = `color-mix(in hsl, var(--col06) ${meterValue*100}%, var(--col04))`;
+    // continue the loop
     if(meterRunning){
         requestAnimationFrame(meterVolume);
     }
 }
+// start the loop on page load
 requestAnimationFrame(meterVolume);
