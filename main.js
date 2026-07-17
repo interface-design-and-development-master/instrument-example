@@ -1,7 +1,15 @@
+//////////
+///// Find the elements I need
+//////////
+const introDialog = document.getElementById("intro-dialog");
+const introDialogCloseButton = document.getElementById("intro-dialog-close-button");
+const infoButton = document.getElementById("info-button");
+const infoDialog = document.getElementById("info-dialog");
+const infoDialogCloseButton = document.getElementById("info-dialog-close-button");
+
 const myCanvas = document.getElementById("adsr-svg-canvas");
 const adsrLine = document.getElementById("adsr-line");
-const introDialog = document.getElementById("intro-dialog");
-const dialogCloseButton = document.getElementById("dialog-close-button");
+
 const volumeSlider = document.getElementById("volume-slider");
 // find all the waveform select radio inputs and make them into an array
 const waveformInputs = Array.from(document.getElementsByClassName("waveformSelect"));
@@ -11,26 +19,47 @@ const filterQSlider = document.getElementById("filter-q-slider");
 const filterTypesSelect = document.getElementById("filter-types-select");
 const volumeFeedback = document.getElementById("volume-feedback");
 
+//////////
+///// Initialise Tone instrument and effects
+//////////
 const synth = new Tone.PolySynth(Tone.Synth);
-// synth.volume.value = 12;
 const filter = new Tone.Filter(0, "lowpass");
 const meter = new Tone.Meter();
+// change the metered volume range to be between 0 and 1
 meter.normalRange = true;
 //meter.smoothing = 0.1;
-
-//// DIALOG INIT
-// show modal on page load
-introDialog.showModal();
-
-dialogCloseButton.addEventListener("click", () => {
-    introDialog.close();
-});
-
-introDialog.addEventListener("close", toneInit);
-
+// connect the parts together then send to audio output
+// function only runs once user has closed the intro dialog
 function toneInit(){
     synth.chain(filter, meter, Tone.Destination);
 }
+
+//////////
+///// Dialog Setup
+//////////
+// show intro modal on page load
+introDialog.showModal();
+// close dialog with button
+introDialogCloseButton.addEventListener("click", () => {
+    introDialog.close();
+});
+// run the tone setup only after user action
+// using the close event, just in case user closes modal in other way than button
+introDialog.addEventListener("close", toneInit);
+// show info modal on button press
+infoButton.addEventListener("click", () => { infoDialog.showModal() });
+// close dialog with button
+infoDialogCloseButton.addEventListener("click", () => {
+    infoDialog.close();
+});
+
+
+
+
+
+
+
+
 
 const defaultPreset = {
     volume: 0,
