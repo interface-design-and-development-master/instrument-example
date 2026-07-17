@@ -138,7 +138,7 @@ const keyCodeToNote = {
     },
 }
 
-// we're encapsulating these eventlisteners in a function, so they're only added when toneInit is called from main.js
+// we're encapsulating these eventListeners in a function, so they're only added when toneInit is called from main.js
 // be careful when referencing across multiple JS files like this, the order in which they're declared in your HTML
 // will change which functions can see each other
 function keyboardControlInit(){

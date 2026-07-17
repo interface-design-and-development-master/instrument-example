@@ -31,17 +31,19 @@ This favicon was generated using the following graphics from Twitter Twemoji:
 <!--  displayed on page load to start the sound engine  -->
     <dialog id="intro-dialog">
         <p>
-            Hi, this is a synthesizer built as an example for the Interface Design and Development course. It will make
-            some noise when used, so please double-check your system volume.
+            Hi, this is a synthesizer built as an example for the Interface Design and Development course.
         </p>
-        <button id="intro-dialog-close-button" autofocus>OK</button>
+        <p>
+            It will make some noise when used, so please double-check your system volume.
+        </p>
+        <button id="intro-dialog-close-button" class="dialogButton" autofocus>OK</button>
     </dialog>
 
     <dialog id="info-dialog">
         <p>
             This synthesizer was designed by <a href="https://patrickhase.xyz/">Patrick McMahon</a>.
         </p>
-        <button id="info-dialog-close-button" autofocus>OK</button>
+        <button id="info-dialog-close-button" class="dialogButton" autofocus>OK</button>
     </dialog>
 
     <main>
@@ -53,8 +55,8 @@ This favicon was generated using the following graphics from Twitter Twemoji:
     
         <section class="outputSection">
             <h2>Output</h2>
-            <div class="rangeInputBox">
-                <div class="rangeSliderBox">
+            <div class="volumeInputBox">
+                <div class="volumeSliderBox">
                     <span>Min</span>
                     <input type="range" name="volume" id="volume-slider"
                            min="-32" max="0">
