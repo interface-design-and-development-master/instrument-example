@@ -30,41 +30,50 @@ This favicon was generated using the following graphics from Twitter Twemoji:
 <body>
 <!--  displayed on page load to start the sound engine  -->
     <dialog id="intro-dialog">
-        <p>
-            Hi, this is a synthesizer built as an example for the Interface Design and Development course.
-        </p>
-        <p>
-            It will make some noise when used, so please double-check your system volume.
-        </p>
+
+        <p>Hi, this is a synthesizer built as an example for the Interface Design and Development course.</p>
+        <p>It will make some noise when used, so please double-check your system volume.</p>
         <button id="intro-dialog-close-button" class="dialogButton" autofocus>OK</button>
+
     </dialog>
 
     <dialog id="info-dialog">
-        <p>
-            This synthesizer was designed by <a href="https://patrickhase.xyz/">Patrick McMahon</a>.
-        </p>
+
+        <p>This synthesizer was designed by <a href="https://patrickhase.xyz/">Patrick McMahon</a>.</p>
         <button id="info-dialog-close-button" class="dialogButton" autofocus>OK</button>
+
     </dialog>
 
     <main>
     
         <section class="infoSection">
+
             <h1>Specialisation Synth 01</h1>
+
             <button id="info-button">i</button>
+
         </section>
     
         <section class="outputSection">
-            <h2>Output</h2>
-            <div class="volumeInputBox">
+
+            <div class="outputHeadingFeedback">
+                <h2>Output</h2>
+                <div id="volume-feedback"></div>
+            </div>
+
+            <div class="componentBox">
+
+                <h3><label for="volume-slider">Volume</label></h3>
+
                 <div class="volumeSliderBox">
                     <span>Min</span>
                     <input type="range" name="volume" id="volume-slider"
                            min="-32" max="0">
                     <span>Max</span>
                 </div>
-                <label for="volume-slider">Volume</label>
+
             </div>
-            <div id="volume-feedback"></div>
+
         </section>
     
         <section class="timbreSection">

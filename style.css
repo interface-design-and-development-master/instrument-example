@@ -6,6 +6,7 @@
     /* 1 Bit Monitor Glow Palette by Polyducks https://lospec.com/palette-list/1bit-monitor-glow */
     --col01: #222323;
     --col02: #f0f6f0;
+    --shadow: #dce2dc;
     /* Late Night Bath Palette by sukinapan https://lospec.com/palette-list/late-night-bath */
     --col03: #ffc4b8;
     --col04: #5b5d70;
@@ -20,6 +21,7 @@
         /* 1 Bit Monitor Glow Palette by Polyducks https://lospec.com/palette-list/1bit-monitor-glow */
         --col01: #f0f6f0;
         --col02: #222323;
+        --shadow: #0e0f0f;
         /* Late Night Bath Palette by sukinapan https://lospec.com/palette-list/late-night-bath */
         --col03: #f69197;
         --col04: #74838c;
@@ -39,8 +41,6 @@ body {
     line-height: 1.5;
 }
 
-
-
 main {
     max-width: 1280px;
     background-color: var(--col02);
@@ -57,12 +57,30 @@ section {
     border: var(--border);
     border-color: var(--col05);
     border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /*generated using https://neumorphism.io*/
+    box-shadow: inset 0.2rem 0.2rem 0.4rem var(--shadow);
+}
+
+label{
+    display: flex;
+    gap: 1rem;
+}
+
+.componentBox {
+    border: var(--border);
+    border-color: var(--col04);
+    border-radius: 1rem;
+    padding: 1rem;
+    /*generated using https://neumorphism.io*/
+    box-shadow:  0.2rem 0.2rem 0.4rem var(--shadow);
 }
 
 /**
 Dialogs
 **/
-
 dialog[open] {
     margin: auto;
     padding: 2rem;
@@ -90,11 +108,69 @@ dialog::backdrop {
     color: var(--col01);
 }
 
+/**
+Info Section
+**/
 .infoSection {
     border: none;
     display: flex;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+    box-shadow: none;
 }
+
+h1 {
+    color: var(--col02);
+    /*
+    Source - https://stackoverflow.com/a/23981970
+    Posted by ancestral, modified by community. See post 'Timeline' for change history
+    Retrieved 2026-07-10, License - CC BY-SA 3.0
+    */
+    -webkit-text-stroke: 0.0625rem var(--col01);
+}
+
+#info-button {
+    background-color: var(--col01);
+    color: var(--col02);
+    padding: 0.25rem 0.75rem;
+    border: var(--border);
+    border-radius: 0.25rem;
+    font-size: 1.5rem;
+}
+#info-button:hover {
+    background-color: var(--col02);
+    color: var(--col01);
+}
+
+/**
+Output Section
+**/
+.outputHeadingFeedback {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#volume-feedback{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 1rem;
+    border: double 0.25rem var(--col05);
+    background-color: var(--col04);
+    background-clip: padding-box;
+    /*generated using https://neumorphism.io*/
+    box-shadow:  0.2rem 0.2rem 0.4rem var(--shadow);
+}
+/*this holds slider and the values*/
+.volumeSliderBox {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    input[type="range"] {
+        flex: 1;
+    }
+}
+
 .keyboardSection {
     border: none;
     grid-column: 1/3;
@@ -111,34 +187,12 @@ dialog::backdrop {
     flex-direction: column;
     gap: 1rem;
 }
-/*this holds the slider and the label*/
-.volumeInputBox {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-/*this holds slider and the values*/
-.volumeSliderBox {
-    display: flex;
-    gap: 1rem;
-}
 
 
 
-h1 {
-    color: var(--col02);
-    /*
-    Source - https://stackoverflow.com/a/23981970
-    Posted by ancestral, modified by community. See post 'Timeline' for change history
-    Retrieved 2026-07-10, License - CC BY-SA 3.0
-    */
-    -webkit-text-stroke: 0.0625rem var(--col01);
-}
 
-label{
-    display: flex;
-    gap: 1rem;
-}
+
+
 
 .envelopeInput{
     display: flex;
@@ -151,6 +205,8 @@ label{
         width: 4ch;
     }
 }
+
+
 
 
 
@@ -167,7 +223,7 @@ input[type="range"] {
     appearance: none;
     background: transparent;
     cursor: pointer;
-    width: 20rem;
+    /*width: 20rem;*/
 }
 
 /* Removes default focus */
@@ -247,11 +303,4 @@ fieldset{
     padding: 1rem;
 }
 
-#volume-feedback{
-    width: 2rem;
-    height: 2rem;
-    border-radius: 1rem;
-    border: double 0.25rem var(--col05);
-    background-color: var(--col04);
-    background-clip: padding-box;
-}
+
