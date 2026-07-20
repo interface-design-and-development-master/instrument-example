@@ -28,7 +28,12 @@
         --col05: #5b5d70;
         --col06: #ffc4b8;
         --border: solid 0.125rem var(--col01);
+
     }
+}
+
+html {
+
 }
 
 body {
@@ -42,7 +47,7 @@ body {
 }
 
 main {
-    max-width: 1280px;
+    max-width: 1200px;
     background-color: var(--col02);
     padding: 1rem;
     gap: 1rem;
@@ -344,6 +349,20 @@ select {
     color: var(--col02);
     border: var(--border);
     padding: 0 0.5rem;
+}
+
+@media (width < 1600px) {
+
+}
+
+@media (width < 1200px) {
+    main {
+        max-width: 840px;
+    }
+}
+
+@media (width < 840px) {
+
 }
 
 

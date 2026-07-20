@@ -147,14 +147,13 @@ function keyboardControlInit(){
     window.addEventListener("keydown", (e) => {
         // first check if this is a repeat event : stops multiple notes being triggered from one press
         if (e.repeat) return;
+        // as this event runs on all key presses we want to make sure the one pressed has an associated note to play
+        // we do this via the conditional which says : if the key pressed doesn't exist in the object stop the function
+        if (!(e.key in keyCodeToNote)) return;
         // find the appropriate note+octave based on the key pressed
         let note = keyCodeToNote[e.key].note;
         let octave = keyCodeToNote[e.key].octave;
-        // because we haven't mapped all the keys, we only want to pass a valid result
-        // if the code doesn't exist in keyCodeToNote noteOctave will equal undefined, so we can filter using an if conditional
-        if(note){
-            synth.triggerAttack(note+octave);
-        }
+        synth.triggerAttack(note+octave);
         // finally we want to add visual feedback to the onscreen keyboard
         // we need to find the appropriate key so we loop through and find if the associated note matches
         allKeys.forEach((key) => {
@@ -172,6 +171,7 @@ function keyboardControlInit(){
     });
     // then on up we trigger the note release
     window.addEventListener("keyup", (e) => {
+        if (!(e.key in keyCodeToNote)) return;
         // find the appropriate note+octave based on the code
         let note = keyCodeToNote[e.key].note;
         let octave = keyCodeToNote[e.key].octave;
