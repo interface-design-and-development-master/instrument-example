@@ -380,6 +380,11 @@ select {
     :root {
         --gap-spacing: 0.25rem;
     }
+    #volume-feedback {
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 0.75rem;
+    }
 }
 
 
