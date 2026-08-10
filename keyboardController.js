@@ -42,7 +42,7 @@ allKeys.forEach(key => {
    // we need to account for moving between keys with mouse button held down
    key.addEventListener("mouseenter", (e) => {
        // e.buttons will tell us which mouse button is currently active : a result of
-       // 1 means the left mouse button, so if that is found we quit the function using
+       // 1 means the left mouse button, so if that isn't found we quit the function using
        // the return keyword
        if(e.buttons !== 1) { return }
        let note = e.target.dataset.note;
