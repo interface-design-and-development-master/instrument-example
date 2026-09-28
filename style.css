@@ -188,7 +188,16 @@ Timbre Section
     flex: 1;
 }
 .waveformBox {
-    flex: unset
+    flex: unset;
+}
+.waveformRadioBox {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.waveformSelectBox {
+    display: none;
 }
 .filterBox {
     justify-content: space-between;
@@ -394,6 +403,18 @@ select {
         box-shadow: inset 0.2rem 0.2rem 0.4rem var(--shadow);
     }
 
+}
+
+@media (height < 640px) {
+    .timbreBox {
+        flex-direction: column;
+    }
+    .waveformRadioBox {
+        display: none;
+    }
+    .waveformSelectBox {
+        display: block;
+    }
 }
 
 @media (width < 840px), (height < 569px) {

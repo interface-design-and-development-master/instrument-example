@@ -26,6 +26,8 @@ const infoDialogCloseButton = document.getElementById("info-dialog-close-button"
 const volumeSlider = document.getElementById("volume-slider");
 // find all the waveform select radio inputs and make them into an array
 const waveformInputs = Array.from(document.getElementsByClassName("waveformSelect"));
+// this is used on smaller screens, but must mirror above
+const waveformTypesSelect = document.getElementById("waveform-types-select");
 const filterTypesSelect = document.getElementById("filter-types-select");
 const filterFreqSlider = document.getElementById("filter-freq-slider");
 const filterQSlider = document.getElementById("filter-q-slider");
@@ -137,12 +139,25 @@ function changeOscillatorType(newOscType){
     synth.set({
         oscillator : { type: newOscType }
     });
+    // update the two inputs to reflect each other
+    // first the radio
+    waveformInputs.forEach((input) => {
+       if(input.value === newOscType){
+            input.checked = true;
+       }
+    });
+    // then the select
+    waveformTypesSelect.value = newOscType;
 }
 // as we've stored the waveform checkboxes in an array we can just loop through and add an eventlistener to each in turn
 waveformInputs.forEach((input) => {
     input.addEventListener("input", (e) => {
         changeOscillatorType(e.target.value);
     });
+});
+// we also need to handle our select element for waveforms, used in a smaller screen size
+waveformTypesSelect.addEventListener("input", (e) => {
+    changeOscillatorType(e.target.value);
 });
 
 function changeFilterType(newFilterType){

@@ -92,46 +92,64 @@ This favicon was generated using the following graphics from Twitter Twemoji:
 
                     <h3>Waveform</h3>
 
-                    <label for="sine-select">
-                        <input type="radio" id="sine-select" class="waveformSelect" name="waveform" value="sine" />
+                    <div class="waveformRadioBox">
+                        <label for="sine-select">
+                            <input type="radio" id="sine-select" class="waveformSelect" name="waveform" value="sine" />
 
-                        <svg id="sine-svg" width="1.5rem" height="1.5rem" viewBox="0 0 100 100"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path stroke="var(--col01)" stroke-width="0.25rem" fill-opacity="0"
-                                  d="M 0,50 Q 25,0 50,50 Q 75,100 100,50"/>
-                        </svg>
-                        Sine
-                    </label>
+                            <svg id="sine-svg" width="1.5rem" height="1.5rem" viewBox="0 0 100 100"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke="var(--col01)" stroke-width="0.25rem" fill-opacity="0"
+                                      d="M 0,50 Q 25,0 50,50 Q 75,100 100,50"/>
+                            </svg>
+                            Sine
+                        </label>
 
-                    <label for="square-select">
-                        <input type="radio" id="square-select" class="waveformSelect" name="waveform" value="square" />
-                        <svg id="sine-svg" width="1.5rem" height="1.5rem" viewBox="0 0 100 100"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path stroke="var(--col01)" stroke-width="0.25rem" fill-opacity="0"
-                                  d="M 3,75 L 3,25 L 50,25 L 50,75 L 97,75 L 97,25"/>
-                        </svg>
-                        Square
-                    </label>
+                        <label for="square-select">
+                            <input type="radio" id="square-select" class="waveformSelect" name="waveform" value="square" />
+                            <svg id="sine-svg" width="1.5rem" height="1.5rem" viewBox="0 0 100 100"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke="var(--col01)" stroke-width="0.25rem" fill-opacity="0"
+                                      d="M 3,75 L 3,25 L 50,25 L 50,75 L 97,75 L 97,25"/>
+                            </svg>
+                            Square
+                        </label>
 
-                    <label for="triangle-select">
-                        <input type="radio" id="triangle-select" class="waveformSelect" name="waveform" value="triangle" />
-                        <svg id="sine-svg" width="1.5rem" height="1.5rem" viewBox="0 0 100 100"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path stroke="var(--col01)" stroke-width="0.25rem" fill-opacity="0"
-                                  d="M 3,75 L 33,25 L 66,75 L 97,25"/>
-                        </svg>
-                        Triangle
-                    </label>
+                        <label for="triangle-select">
+                            <input type="radio" id="triangle-select" class="waveformSelect" name="waveform" value="triangle" />
+                            <svg id="sine-svg" width="1.5rem" height="1.5rem" viewBox="0 0 100 100"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke="var(--col01)" stroke-width="0.25rem" fill-opacity="0"
+                                      d="M 3,75 L 33,25 L 66,75 L 97,25"/>
+                            </svg>
+                            Triangle
+                        </label>
 
-                    <label for="sawtooth-select">
-                        <input type="radio" id="sawtooth-select" class="waveformSelect" name="waveform" value="sawtooth" />
-                        <svg id="sine-svg" width="1.5rem" height="1.5rem" viewBox="0 0 100 100"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path stroke="var(--col01)" stroke-width="0.25rem" fill-opacity="0"
-                                  d="M 3,35 L 50,75 L 50,25 L 97,65"/>
-                        </svg>
-                        Sawtooth
-                    </label>
+                        <label for="sawtooth-select">
+                            <input type="radio" id="sawtooth-select" class="waveformSelect" name="waveform" value="sawtooth" />
+                            <svg id="sine-svg" width="1.5rem" height="1.5rem" viewBox="0 0 100 100"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke="var(--col01)" stroke-width="0.25rem" fill-opacity="0"
+                                      d="M 3,35 L 50,75 L 50,25 L 97,65"/>
+                            </svg>
+                            Sawtooth
+                        </label>
+                    </div>
+
+                    <div class="waveformSelectBox">
+
+                        <label for="waveform-types-select">
+
+                            <select name="filter-types" id="waveform-types-select">
+
+                                <option value="sine">Sine</option>
+                                <option value="square">Square</option>
+                                <option value="triangle">Triangle</option>
+                                <option value="sawtooth">Sawtooth</option>
+
+                            </select>
+                        </label>
+
+                    </div>
 
                 </div>
 
